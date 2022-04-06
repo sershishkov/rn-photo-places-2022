@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { View, Alert, Image, StyleSheet, Text, ScrollView } from 'react-native';
 
 function MapScreen() {
+  const [selectedLocation, set__selectedLocation] = useState();
+
   const region = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -9,7 +12,30 @@ function MapScreen() {
     longitudeDelta: 0.0421,
   };
 
-  return <MapView initialRegion={region} style={styles.map}></MapView>;
+  function selectLocationHandler(event) {
+    // console.log(event.nativeEvent);
+    const lat = event.nativeEvent.coordinate.latitude;
+    const lng = event.nativeEvent.coordinate.longitude;
+    set__selectedLocation({ lat: lat, lng: lng });
+  }
+
+  return (
+    <MapView
+      initialRegion={region}
+      style={styles.map}
+      onPress={selectLocationHandler}
+    >
+      {selectedLocation && (
+        <Marker
+          title='Picked location'
+          coordinate={{
+            latitude: selectedLocation.lat,
+            longitude: selectedLocation.lng,
+          }}
+        />
+      )}
+    </MapView>
+  );
 }
 
 export default MapScreen;
