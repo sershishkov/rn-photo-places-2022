@@ -46,7 +46,7 @@ function ImagePicker() {
     set__pickedImage(image.uri);
   }
 
-  let imagePreview = <Text>No imagetaken yet.</Text>;
+  let imagePreview = <Text>No image taken yet.</Text>;
 
   if (pickedImage) {
     imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
@@ -77,5 +77,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    borderRadius: 4,
   },
 });
