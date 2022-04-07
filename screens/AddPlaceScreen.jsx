@@ -1,12 +1,13 @@
 import { StyleSheet, ScrollView } from 'react-native';
 import PlaceForm from '../components/Places/PlaceForm';
+import { insertPlace } from '../util/database';
 
 function AddPlaceScreen({ navigation }) {
-  function createPlaceHandler(place) {
-    navigation.navigate('AllPlaces', {
-      place: place,
-    });
+  async function createPlaceHandler(place) {
+    await insertPlace(place);
+    navigation.navigate('AllPlaces');
   }
+
   return (
     <ScrollView style={styles.root}>
       <PlaceForm onCreatePlace={createPlaceHandler} />
