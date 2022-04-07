@@ -37,7 +37,7 @@ export function insertPlace(place) {
         `
       INSERT INTO places (title, imageUri, address, lat, lng)
       VALUES (?,?,?,?,? )
-    )`,
+    `,
         [
           place.title,
           place.imageUri,
@@ -88,6 +88,37 @@ export function fetchPlaces() {
           }
 
           resolve(places);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
+export function fetchPlaceDetails(id) {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM places WHERE id = ?',
+        [id],
+        (_, result) => {
+          // console.log(result);
+          const dbPlace = result.rows._array[0];
+          const place = new PlaceModel(
+            dbPlace.title,
+            dbPlace.imageUri,
+            {
+              address: dbPlace.address,
+              lat: dbPlace.lat,
+              lng: dbPlace.lng,
+            },
+            dbPlace.id
+          );
+          resolve(place);
         },
         (_, error) => {
           reject(error);
