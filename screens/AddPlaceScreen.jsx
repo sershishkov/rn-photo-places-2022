@@ -1,8 +1,13 @@
-// import {} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import PlaceForm from '../components/Places/PlaceForm';
 
 function AddPlaceScreen() {
-  return <PlaceForm />;
+  return (
+    <ScrollView style={styles.root}>
+      <PlaceForm />
+    </ScrollView>
+  );
 }
 
 export default AddPlaceScreen;
+const styles = StyleSheet.create({});
