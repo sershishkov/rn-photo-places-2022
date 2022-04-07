@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AllPlacesScreen from './screens/AllPlacesScreen';
 import AddPlaceScreen from './screens/AddPlaceScreen';
 import MapScreen from './screens/MapScreen';
+import PlaceDetailsScreen from './screens/PlaceDetailsScreen';
 import IconButton from './components/ui/IconButton';
 import { Colors } from './constants/colors';
 import { init } from './util/database';
@@ -68,6 +69,13 @@ export default function App() {
             component={MapScreen}
             options={{
               title: 'Map',
+            }}
+          />
+          <Stack.Screen
+            name='PlaceDetails'
+            component={PlaceDetailsScreen}
+            options={{
+              title: 'Place Details',
             }}
           />
         </Stack.Navigator>
